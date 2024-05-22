@@ -37,6 +37,7 @@ h1 {
     text-align: center;
     font-size: 1.3rem;
     border-radius: 10px;
+    overflow-wrap: break-word;
 }
 
 .book h2 {
