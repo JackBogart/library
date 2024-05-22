@@ -15,6 +15,7 @@ Book.prototype.info = function () {
 
 function addBookToLibrary(book) {
     myLibrary.append(book);
+    displayBook(book);
 }
 
 function displayBook(book) {
