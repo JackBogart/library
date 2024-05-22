@@ -1,5 +1,6 @@
 const myLibrary = [];
 const library = document.querySelector('.books');
+const addBookButton = document.querySelector('.add-book-button');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -40,7 +41,7 @@ function displayBook(book) {
     bookRead.textContent = book.read ? 'read already' : 'not read yet';
     bookCard.appendChild(bookRead);
 
-    library.appendChild(bookCard);
+    library.insertBefore(bookCard, addBookButton);
 }
 
 myLibrary.push(new Book('The Hobbit', 'Tolkien J.R.R.', '295', false));
