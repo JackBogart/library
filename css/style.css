@@ -1,12 +1,21 @@
+:root {
+    --dark-blue: hsl(213, 87%, 12%);
+    --primary-blue: hsl(213, 75%, 21%);
+    --light-grey: hsl(0, 0%, 90%);
+    ---grey-translucent: hsla(0, 0%, 50%, 0.5);
+    --light-blue: hsl(185, 65%, 39%);
+    --hover-light-blue: hsl(185, 65%, 29%);
+    --white-text: hsl(0, 0%, 90%);
+}
 body {
-    background-color: hsl(213, 87%, 12%);
-    color: hsl(0, 0%, 76%);
+    background-color: var(--dark-blue);
+    color: var(--white-text);
+    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol';
 }
 
 body > * {
     padding: 25px 150px;
-    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol';
 }
 .books {
     display: grid;
@@ -16,7 +25,7 @@ body > * {
 
 h1 {
     margin: 0px;
-    background-color: hsl(213, 75%, 21%);
+    background-color: var(--primary-blue);
 }
 
 .book {
@@ -24,28 +33,85 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     color: black;
-    background-color: hsl(0, 0%, 81%);
+    background-color: var(--light-grey);
     text-align: center;
     font-size: 1.3rem;
     border-radius: 10px;
 }
 
 .book h2 {
-    background-color: hsl(185, 65%, 39%);
-    color: hsl(0, 0%, 85%);
+    background-color: var(--light-blue);
+    color: var(--white-text);
     border-radius: 10px 10px 0px 0px;
     margin: 0px;
     padding: 1.5rem 0.5rem;
 }
 
-.add-book-button {
+button {
     appearance: none;
     border: none;
     padding: 0px;
-    background-color: hsl(0, 0%, 81%);
+}
+
+.add-book-button {
+    background-color: var(--light-grey);
     border-radius: 10px;
 }
 
 .add-book-button:hover {
-    background-color: hsl(0, 0%, 71%);
+    background-color: hsl(0, 0%, 80%);
+}
+
+dialog {
+    padding: 25px 50px;
+    border-radius: 10px;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+}
+
+.book-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.1rem;
+}
+
+.book-form > * {
+    margin: 10px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.form-row > label {
+    margin-bottom: 5px;
+}
+
+::backdrop {
+    background-color: var(---grey-translucent);
+}
+
+.submit-book {
+    background-color: var(--light-blue);
+    color: white;
+    align-self: center;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.submit-book:hover {
+    background-color: var(--hover-light-blue);
+}
+.cancel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: hsl(0, 100%, 57%);
 }

@@ -1,6 +1,16 @@
 const myLibrary = [];
+
 const library = document.querySelector('.books');
 const addBookButton = document.querySelector('.add-book-button');
+
+const bookDialog = document.querySelector('dialog');
+const submitBook = document.querySelector('.submit-book');
+
+const bookForm = document.querySelector('.book-form');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read = document.querySelector('#read');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -15,7 +25,7 @@ Book.prototype.info = function () {
 };
 
 function addBookToLibrary(book) {
-    myLibrary.append(book);
+    myLibrary.push(book);
     displayBook(book);
 }
 
@@ -43,6 +53,26 @@ function displayBook(book) {
 
     library.insertBefore(bookCard, addBookButton);
 }
+
+addBookButton.addEventListener('click', () => {
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
+
+    bookDialog.showModal();
+});
+
+submitBook.addEventListener('click', (e) => {
+    let isValidForm = bookForm.checkValidity();
+    if (!isValidForm) {
+        bookForm.reportValidity();
+    } else {
+        e.preventDefault();
+        addBookToLibrary(new Book(title.value, author.value, pages.value, read.checked));
+        bookDialog.close();
+    }
+});
 
 myLibrary.push(new Book('The Hobbit', 'Tolkien J.R.R.', '295', false));
 myLibrary.push(new Book('Lord of The Rings', 'Tolkien J.R.R.', '428', false));
