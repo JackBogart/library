@@ -36,7 +36,7 @@ Book.prototype.toggleRead = function () {
 function createDeleteButton(bookCard) {
     const deleteButton = document.createElement('button');
     const trashIcon = document.createElement('img');
-    trashIcon.src = '../img/trash-icon.svg';
+    trashIcon.src = 'img/trash-icon.svg';
     trashIcon.alt = 'trash button';
 
     deleteButton.addEventListener('click', () => {
@@ -67,7 +67,7 @@ function setReadToggleColor(read, readToggle) {
 function createReadToggle(book, bookCard) {
     const readToggle = document.createElement('button');
     const bookIcon = document.createElement('img');
-    bookIcon.src = '../img/book-icon.svg';
+    bookIcon.src = 'img/book-icon.svg';
     bookIcon.alt = 'read toggle';
 
     setReadToggleColor(book.read, readToggle);
