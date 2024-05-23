@@ -9,6 +9,7 @@
     --primary-red: hsl(0, 100%, 57%);
     --hover-primary-red: hsl(0, 100%, 47%);
     --primary-green: hsl(118, 87%, 41%);
+    --hover-primary-green: hsl(118, 87%, 31%);
 }
 body {
     background-color: var(--dark-blue);
@@ -155,6 +156,14 @@ dialog {
     background-color: var(--primary-red);
 }
 
+.read-toggle:hover {
+    background-color: var(--hover-primary-red);
+}
+
 .read-toggle[data-status='read'] {
     background-color: var(--primary-green);
+}
+
+.read-toggle[data-status='read']:hover {
+    background-color: var(--hover-primary-green);
 }
