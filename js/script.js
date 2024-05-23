@@ -1,12 +1,16 @@
+// Array to store book data
 const myLibrary = [];
 
+// Library selectors
 const library = document.querySelector('.books');
 const addBookButton = document.querySelector('.add-book-button');
 const deleteBookButton = document.querySelector('.delete-button');
 
+// Dialog selectors
 const bookDialog = document.querySelector('dialog');
 const submitBook = document.querySelector('.submit-book');
 
+// Form selectors
 const bookForm = document.querySelector('.book-form');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
