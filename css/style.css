@@ -19,7 +19,7 @@ body {
 }
 
 body > * {
-    padding: 25px 150px;
+    padding: 25px clamp(0px, 10vw, 150px);
 }
 .books {
     display: grid;
