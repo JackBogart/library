@@ -90,7 +90,7 @@ dialog {
 .form-row {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: clamp(200px, 50vw, 400px);
 }
 
 .form-row > label {
