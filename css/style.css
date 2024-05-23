@@ -6,6 +6,7 @@
     --light-blue: hsl(185, 65%, 39%);
     --hover-light-blue: hsl(185, 65%, 29%);
     --white-text: hsl(0, 0%, 90%);
+    --primary-red: hsl(0, 100%, 57%);
 }
 body {
     background-color: var(--dark-blue);
@@ -38,6 +39,7 @@ h1 {
     font-size: 1.3rem;
     border-radius: 10px;
     overflow-wrap: break-word;
+    position: relative;
 }
 
 .book h2 {
@@ -114,5 +116,22 @@ dialog {
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    background-color: hsl(0, 100%, 57%);
+    background-color: var(--primary-red);
+}
+
+.delete-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: var(--primary-red);
+    display: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.book:hover > .delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
