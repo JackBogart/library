@@ -25,6 +25,60 @@ Book.prototype.info = function () {
     return `${this.title} by ${this.author}, ${this.pages.toString()} pages, ${readStr}`;
 };
 
+Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+};
+
+function createDeleteButton(bookCard) {
+    const deleteButton = document.createElement('button');
+    const trashIcon = document.createElement('img');
+    trashIcon.src = '../img/trash-icon.svg';
+    trashIcon.alt = 'trash button';
+
+    deleteButton.addEventListener('click', () => {
+        const bookIndex = Number(bookCard.dataset.index);
+
+        // Update all data-index values for book cards after the removed
+        for (let i = bookIndex + 1; i < myLibrary.length; i++) {
+            document.querySelector(`.book[data-index="${i}"]`).setAttribute('data-index', i - 1);
+        }
+
+        library.removeChild(bookCard);
+        myLibrary.splice(bookIndex, 1);
+    });
+
+    deleteButton.appendChild(trashIcon);
+    deleteButton.classList.add('delete-button', 'book-button');
+    return deleteButton;
+}
+
+function setReadToggleColor(read, readToggle) {
+    if (read) {
+        readToggle.setAttribute('data-status', 'read');
+    } else {
+        readToggle.setAttribute('data-status', 'not read');
+    }
+}
+
+function createReadToggle(book, bookCard) {
+    const readToggle = document.createElement('button');
+    const bookIcon = document.createElement('img');
+    bookIcon.src = '../img/book-icon.svg';
+    bookIcon.alt = 'read toggle';
+
+    setReadToggleColor(book.read, readToggle);
+
+    readToggle.addEventListener('click', () => {
+        book.read = !book.read;
+        setReadToggleColor(book.read, readToggle);
+        bookCard.querySelector('.read-status').textContent = book.read ? 'read already' : 'not read yet';
+    });
+
+    readToggle.appendChild(bookIcon);
+    readToggle.classList.add('read-toggle', 'book-button');
+    return readToggle;
+}
+
 function addBookToLibrary(book) {
     displayBook(book);
     myLibrary.push(book);
@@ -51,30 +105,11 @@ function displayBook(book) {
 
     const bookRead = document.createElement('p');
     bookRead.textContent = book.read ? 'read already' : 'not read yet';
+    bookRead.classList.add('read-status');
     bookCard.appendChild(bookRead);
 
-    // Adds delete button
-    const deleteButton = document.createElement('button');
-    const trashIcon = document.createElement('img');
-    trashIcon.src = '../img/trash-icon.svg';
-    trashIcon.alt = 'trash button';
-
-    deleteButton.addEventListener('click', (e) => {
-        const bookCard = e.target.closest('.book');
-        const bookIndex = Number(bookCard.dataset.index);
-
-        // Update all data-index values for book cards after the removed
-        for (let i = bookIndex + 1; i < myLibrary.length; i++) {
-            document.querySelector(`.book[data-index="${i}"]`).setAttribute('data-index', i - 1);
-        }
-
-        library.removeChild(bookCard);
-        myLibrary.splice(bookIndex, 1);
-    });
-
-    deleteButton.appendChild(trashIcon);
-    deleteButton.classList.add('delete-button');
-    bookCard.appendChild(deleteButton);
+    bookCard.appendChild(createDeleteButton(bookCard));
+    bookCard.appendChild(createReadToggle(book, bookCard));
 
     library.insertBefore(bookCard, addBookButton);
 }

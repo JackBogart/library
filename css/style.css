@@ -7,6 +7,8 @@
     --hover-light-blue: hsl(185, 65%, 29%);
     --white-text: hsl(0, 0%, 90%);
     --primary-red: hsl(0, 100%, 57%);
+    --hover-primary-red: hsl(0, 100%, 47%);
+    --primary-green: hsl(118, 87%, 41%);
 }
 body {
     background-color: var(--dark-blue);
@@ -119,19 +121,40 @@ dialog {
     background-color: var(--primary-red);
 }
 
-.delete-button {
+.cancel:hover {
+    background-color: var(--hover-primary-red);
+}
+
+.book-button {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    background-color: var(--primary-red);
     display: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
 }
 
-.book:hover > .delete-button {
+.delete-button {
+    bottom: 5px;
+    right: 5px;
+    background-color: var(--primary-red);
+}
+
+.book:hover > button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.delete-button:hover {
+    background-color: var(--hover-primary-red);
+}
+
+.read-toggle {
+    bottom: 50px;
+    right: 5px;
+    background-color: var(--primary-red);
+}
+
+.read-toggle[data-status='read'] {
+    background-color: var(--primary-green);
 }
