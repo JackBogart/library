@@ -17,21 +17,51 @@ const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    #title;
+    #author;
+    #pages;
+    #read;
+
+    constructor(title, author, pages, read) {
+        this.#title = title;
+        this.#author = author;
+        this.#pages = pages;
+        this.#read = read;
+    }
+
+    get title() {
+        return this.#title;
+    }
+
+    set title(title) {
+        this.#title = title;
+    }
+
+    get author() {
+        return this.#author;
+    }
+
+    set author(author) {
+        this.#author = author;
+    }
+
+    get pages() {
+        return this.#pages;
+    }
+
+    set pages(pages) {
+        this.#pages = pages;
+    }
+
+    get read() {
+        return this.#read;
+    }
+
+    toggleRead() {
+        this.#read = !this.#read;
+    }
 }
-
-Book.prototype.info = function () {
-    const readStr = this.read ? 'read already' : 'not read yet';
-    return `${this.title} by ${this.author}, ${this.pages.toString()} pages, ${readStr}`;
-};
-
-Book.prototype.toggleRead = function () {
-    this.read = !this.read;
-};
 
 function createDeleteButton(bookCard) {
     const deleteButton = document.createElement('button');
@@ -73,7 +103,7 @@ function createReadToggle(book, bookCard) {
     setReadToggleColor(book.read, readToggle);
 
     readToggle.addEventListener('click', () => {
-        book.read = !book.read;
+        book.toggleRead();
         setReadToggleColor(book.read, readToggle);
         bookCard.querySelector('.read-status').textContent = book.read ? 'read already' : 'not read yet';
     });
