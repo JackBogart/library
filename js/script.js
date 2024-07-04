@@ -18,156 +18,169 @@ const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
 
 class Book {
-    #title;
-    #author;
-    #pages;
-    #read;
+  #title;
+  #author;
+  #pages;
+  #read;
 
-    constructor(title, author, pages, read) {
-        this.#title = title;
-        this.#author = author;
-        this.#pages = pages;
-        this.#read = read;
-    }
+  constructor(title, author, pages, read) {
+    this.#title = title;
+    this.#author = author;
+    this.#pages = pages;
+    this.#read = read;
+  }
 
-    get title() {
-        return this.#title;
-    }
+  get title() {
+    return this.#title;
+  }
 
-    set title(title) {
-        this.#title = title;
-    }
+  set title(title) {
+    this.#title = title;
+  }
 
-    get author() {
-        return this.#author;
-    }
+  get author() {
+    return this.#author;
+  }
 
-    set author(author) {
-        this.#author = author;
-    }
+  set author(author) {
+    this.#author = author;
+  }
 
-    get pages() {
-        return this.#pages;
-    }
+  get pages() {
+    return this.#pages;
+  }
 
-    set pages(pages) {
-        this.#pages = pages;
-    }
+  set pages(pages) {
+    this.#pages = pages;
+  }
 
-    get read() {
-        return this.#read;
-    }
+  get read() {
+    return this.#read;
+  }
 
-    toggleRead() {
-        this.#read = !this.#read;
-    }
+  toggleRead() {
+    this.#read = !this.#read;
+  }
 }
 
 function createDeleteButton(bookCard) {
-    const deleteButton = document.createElement('button');
-    const trashIcon = document.createElement('img');
-    trashIcon.src = 'img/trash-icon.svg';
-    trashIcon.alt = 'trash button';
+  const deleteButton = document.createElement('button');
+  const trashIcon = document.createElement('img');
+  trashIcon.src = 'img/trash-icon.svg';
+  trashIcon.alt = 'trash button';
 
-    deleteButton.addEventListener('click', () => {
-        const bookIndex = Number(bookCard.dataset.index);
+  deleteButton.addEventListener('click', () => {
+    const bookIndex = Number(bookCard.dataset.index);
 
-        // Update all data-index values for book cards after the removed
-        for (let i = bookIndex + 1; i < myLibrary.length; i++) {
-            document.querySelector(`.book[data-index="${i}"]`).setAttribute('data-index', i - 1);
-        }
+    // Update all data-index values for book cards after the removed
+    for (let i = bookIndex + 1; i < myLibrary.length; i++) {
+      document
+        .querySelector(`.book[data-index="${i}"]`)
+        .setAttribute('data-index', i - 1);
+    }
 
-        library.removeChild(bookCard);
-        myLibrary.splice(bookIndex, 1);
-    });
+    library.removeChild(bookCard);
+    myLibrary.splice(bookIndex, 1);
+  });
 
-    deleteButton.appendChild(trashIcon);
-    deleteButton.classList.add('delete-button', 'book-button');
-    return deleteButton;
+  deleteButton.appendChild(trashIcon);
+  deleteButton.classList.add('delete-button', 'book-button');
+  return deleteButton;
 }
 
 function setReadToggleColor(read, readToggle) {
-    if (read) {
-        readToggle.setAttribute('data-status', 'read');
-    } else {
-        readToggle.setAttribute('data-status', 'not read');
-    }
+  if (read) {
+    readToggle.setAttribute('data-status', 'read');
+  } else {
+    readToggle.setAttribute('data-status', 'not read');
+  }
 }
 
 function createReadToggle(book, bookCard) {
-    const readToggle = document.createElement('button');
-    const bookIcon = document.createElement('img');
-    bookIcon.src = 'img/book-icon.svg';
-    bookIcon.alt = 'read toggle';
+  const readToggle = document.createElement('button');
+  const bookIcon = document.createElement('img');
+  bookIcon.src = 'img/book-icon.svg';
+  bookIcon.alt = 'read toggle';
 
+  setReadToggleColor(book.read, readToggle);
+
+  readToggle.addEventListener('click', () => {
+    book.toggleRead();
     setReadToggleColor(book.read, readToggle);
+    bookCard.querySelector('.read-status').textContent = book.read
+      ? 'read already'
+      : 'not read yet';
+  });
 
-    readToggle.addEventListener('click', () => {
-        book.toggleRead();
-        setReadToggleColor(book.read, readToggle);
-        bookCard.querySelector('.read-status').textContent = book.read ? 'read already' : 'not read yet';
-    });
-
-    readToggle.appendChild(bookIcon);
-    readToggle.classList.add('read-toggle', 'book-button');
-    return readToggle;
+  readToggle.appendChild(bookIcon);
+  readToggle.classList.add('read-toggle', 'book-button');
+  return readToggle;
 }
 
 function addBookToLibrary(book) {
-    displayBook(book);
-    myLibrary.push(book);
+  displayBook(book);
+  myLibrary.push(book);
 }
 
 function displayBook(book) {
-    // Create and assign class for styling
-    const bookCard = document.createElement('div');
-    bookCard.classList.add('book');
-    bookCard.dataset.index = myLibrary.length;
+  // Create and assign class for styling
+  const bookCard = document.createElement('div');
+  bookCard.classList.add('book');
+  bookCard.dataset.index = myLibrary.length;
 
-    // Create separate elements of card
-    const bookTitle = document.createElement('h2');
-    bookTitle.textContent = book.title;
-    bookCard.appendChild(bookTitle);
+  // Create separate elements of card
+  const bookTitle = document.createElement('h2');
+  bookTitle.textContent = book.title;
+  bookCard.appendChild(bookTitle);
 
-    const bookAuthor = document.createElement('p');
-    bookAuthor.textContent = book.author;
-    bookCard.appendChild(bookAuthor);
+  const bookAuthor = document.createElement('p');
+  bookAuthor.textContent = book.author;
+  bookCard.appendChild(bookAuthor);
 
-    const bookPageCount = document.createElement('p');
-    bookPageCount.textContent = `${book.pages} pages`;
-    bookCard.appendChild(bookPageCount);
+  const bookPageCount = document.createElement('p');
+  bookPageCount.textContent = `${book.pages} pages`;
+  bookCard.appendChild(bookPageCount);
 
-    const bookRead = document.createElement('p');
-    bookRead.textContent = book.read ? 'read already' : 'not read yet';
-    bookRead.classList.add('read-status');
-    bookCard.appendChild(bookRead);
+  const bookRead = document.createElement('p');
+  bookRead.textContent = book.read ? 'read already' : 'not read yet';
+  bookRead.classList.add('read-status');
+  bookCard.appendChild(bookRead);
 
-    bookCard.appendChild(createDeleteButton(bookCard));
-    bookCard.appendChild(createReadToggle(book, bookCard));
+  bookCard.appendChild(createDeleteButton(bookCard));
+  bookCard.appendChild(createReadToggle(book, bookCard));
 
-    library.insertBefore(bookCard, addBookButton);
+  library.insertBefore(bookCard, addBookButton);
 }
 
 addBookButton.addEventListener('click', () => {
-    title.value = '';
-    author.value = '';
-    pages.value = '';
-    read.checked = false;
+  title.value = '';
+  author.value = '';
+  pages.value = '';
+  read.checked = false;
 
-    bookDialog.showModal();
+  bookDialog.showModal();
 });
 
 submitBook.addEventListener('click', (e) => {
-    let isValidForm = bookForm.checkValidity();
-    if (!isValidForm) {
-        bookForm.reportValidity();
-    } else {
-        e.preventDefault();
-        addBookToLibrary(new Book(title.value, author.value, pages.value, read.checked));
-        bookDialog.close();
-    }
+  let isValidForm = bookForm.checkValidity();
+  if (!isValidForm) {
+    bookForm.reportValidity();
+  } else {
+    e.preventDefault();
+    addBookToLibrary(
+      new Book(title.value, author.value, pages.value, read.checked),
+    );
+    bookDialog.close();
+  }
 });
 
 addBookToLibrary(new Book('The Hobbit', 'Tolkien J.R.R.', '295', false));
 addBookToLibrary(new Book('Lord of The Rings', 'Tolkien J.R.R.', '428', false));
-addBookToLibrary(new Book("Harry Potter and the Sorceror's Stone", 'J.K. Rowling', '328', true));
+addBookToLibrary(
+  new Book(
+    "Harry Potter and the Sorceror's Stone",
+    'J.K. Rowling',
+    '328',
+    true,
+  ),
+);

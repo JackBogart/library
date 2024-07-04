@@ -1,171 +1,171 @@
 :root {
-    --dark-blue: hsl(213, 87%, 12%);
-    --primary-blue: hsl(213, 75%, 21%);
-    --light-grey: hsl(0, 0%, 90%);
-    ---grey-translucent: hsla(0, 0%, 50%, 0.5);
-    --light-blue: hsl(185, 65%, 39%);
-    --hover-light-blue: hsl(185, 65%, 29%);
-    --white-text: hsl(0, 0%, 90%);
-    --primary-red: hsl(0, 100%, 57%);
-    --hover-primary-red: hsl(0, 100%, 47%);
-    --primary-green: hsl(118, 87%, 41%);
-    --hover-primary-green: hsl(118, 87%, 31%);
+  --dark-blue: hsl(213, 87%, 12%);
+  --primary-blue: hsl(213, 75%, 21%);
+  --light-grey: hsl(0, 0%, 90%);
+  ---grey-translucent: hsla(0, 0%, 50%, 0.5);
+  --light-blue: hsl(185, 65%, 39%);
+  --hover-light-blue: hsl(185, 65%, 29%);
+  --white-text: hsl(0, 0%, 90%);
+  --primary-red: hsl(0, 100%, 57%);
+  --hover-primary-red: hsl(0, 100%, 47%);
+  --primary-green: hsl(118, 87%, 41%);
+  --hover-primary-green: hsl(118, 87%, 31%);
 }
 body {
-    background-color: var(--dark-blue);
-    color: var(--white-text);
-    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol';
+  background-color: var(--dark-blue);
+  color: var(--white-text);
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 body > * {
-    padding: 25px clamp(0px, 10vw, 150px);
+  padding: 25px clamp(0px, 10vw, 150px);
 }
 .books {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-    gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  gap: 25px;
 }
 
 h1 {
-    margin: 0px;
-    background-color: var(--primary-blue);
+  margin: 0px;
+  background-color: var(--primary-blue);
 }
 
 .book {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: black;
-    background-color: var(--light-grey);
-    text-align: center;
-    font-size: 1.3rem;
-    border-radius: 10px;
-    overflow-wrap: break-word;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: black;
+  background-color: var(--light-grey);
+  text-align: center;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  overflow-wrap: break-word;
+  position: relative;
 }
 
 .book h2 {
-    background-color: var(--light-blue);
-    color: var(--white-text);
-    border-radius: 10px 10px 0px 0px;
-    margin: 0px;
-    padding: 1.5rem 0.5rem;
+  background-color: var(--light-blue);
+  color: var(--white-text);
+  border-radius: 10px 10px 0px 0px;
+  margin: 0px;
+  padding: 1.5rem 0.5rem;
 }
 
 button {
-    appearance: none;
-    border: none;
-    padding: 0px;
+  appearance: none;
+  border: none;
+  padding: 0px;
 }
 
 .add-book-button {
-    background-color: var(--light-grey);
-    border-radius: 10px;
+  background-color: var(--light-grey);
+  border-radius: 10px;
 }
 
 .add-book-button:hover {
-    background-color: hsl(0, 0%, 80%);
+  background-color: hsl(0, 0%, 80%);
 }
 
 dialog {
-    padding: 25px 50px;
-    border-radius: 10px;
-    background-color: var(--primary-blue);
-    color: white;
-    border: none;
+  padding: 25px 50px;
+  border-radius: 10px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
 }
 
 .book-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.1rem;
 }
 
 .book-form > * {
-    margin: 10px;
+  margin: 10px;
 }
 
 .form-row {
-    display: flex;
-    flex-direction: column;
-    width: clamp(200px, 50vw, 400px);
+  display: flex;
+  flex-direction: column;
+  width: clamp(200px, 50vw, 400px);
 }
 
 .form-row > label {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 ::backdrop {
-    background-color: var(---grey-translucent);
+  background-color: var(---grey-translucent);
 }
 
 .submit-book {
-    background-color: var(--light-blue);
-    color: white;
-    align-self: center;
-    padding: 10px;
-    border-radius: 25px;
+  background-color: var(--light-blue);
+  color: white;
+  align-self: center;
+  padding: 10px;
+  border-radius: 25px;
 }
 
 .submit-book:hover {
-    background-color: var(--hover-light-blue);
+  background-color: var(--hover-light-blue);
 }
 .cancel {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: var(--primary-red);
-    color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-red);
+  color: white;
 }
 
 .cancel:hover {
-    background-color: var(--hover-primary-red);
+  background-color: var(--hover-primary-red);
 }
 
 .book-button {
-    position: absolute;
-    display: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    box-shadow: grey 1px 1px 3px;
+  position: absolute;
+  display: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: grey 1px 1px 3px;
 }
 
 .delete-button {
-    bottom: 5px;
-    right: 5px;
-    background-color: var(--primary-red);
+  bottom: 5px;
+  right: 5px;
+  background-color: var(--primary-red);
 }
 
 .book:hover > button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .delete-button:hover {
-    background-color: var(--hover-primary-red);
+  background-color: var(--hover-primary-red);
 }
 
 .read-toggle {
-    bottom: 50px;
-    right: 5px;
-    background-color: var(--primary-red);
+  bottom: 50px;
+  right: 5px;
+  background-color: var(--primary-red);
 }
 
 .read-toggle:hover {
-    background-color: var(--hover-primary-red);
+  background-color: var(--hover-primary-red);
 }
 
 .read-toggle[data-status='read'] {
-    background-color: var(--primary-green);
+  background-color: var(--primary-green);
 }
 
 .read-toggle[data-status='read']:hover {
-    background-color: var(--hover-primary-green);
+  background-color: var(--hover-primary-green);
 }
