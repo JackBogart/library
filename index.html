@@ -10,10 +10,18 @@
   </head>
   <body>
     <dialog>
-      <form class="book-form" action="">
+      <form class="book-form" method="dialog" action="" novalidate>
         <div class="form-row">
           <label for="title">Title</label>
-          <input type="text" maxlength="40" id="title" name="title" required />
+          <input
+            type="text"
+            minlength="2"
+            maxlength="40"
+            id="title"
+            name="title"
+            required
+          />
+          <span class="error" aria-live="polite"></span>
         </div>
         <div class="form-row">
           <label for="author">Author</label>
@@ -24,26 +32,23 @@
             name="author"
             required
           />
+          <span class="error" aria-live="polite"></span>
         </div>
         <div class="form-row">
           <label for="pages">Page #</label>
-          <input type="number" id="pages" name="pages" required />
+          <input type="number" id="pages" name="pages" min="1" required />
+          <span class="error" aria-live="polite"></span>
         </div>
         <div class="">
           <input type="checkbox" id="read" name="read" />
           <label for="read">Read?</label>
         </div>
 
-        <button class="submit-book" type="submit">Add Book</button>
-        <button
-          class="cancel"
-          value="cancel"
-          formmethod="dialog"
-          formnovalidate
-        >
-          X
+        <button class="submit-book" type="submit" formmethod="dialog">
+          Add Book
         </button>
       </form>
+      <button type="button" class="cancel" value="cancel">X</button>
     </dialog>
     <h1>library</h1>
     <div class="books">

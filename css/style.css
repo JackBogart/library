@@ -69,6 +69,7 @@ button {
 }
 
 dialog {
+  position: fixed;
   padding: 25px 50px;
   border-radius: 10px;
   background-color: var(--primary-blue);
@@ -114,10 +115,10 @@ dialog {
 }
 .cancel {
   position: absolute;
-  top: 0;
-  right: 0;
-  height: 20px;
-  width: 20px;
+  top: 10px;
+  right: 10px;
+  height: 25px;
+  width: 25px;
   border-radius: 50%;
   background-color: var(--primary-red);
   color: white;
@@ -168,4 +169,33 @@ dialog {
 
 .read-toggle[data-status='read']:hover {
   background-color: var(--hover-primary-green);
+}
+
+label:has(+ input:required)::after {
+  color: red;
+
+  content: '*';
+}
+.error {
+  color: var(--primary-red);
+}
+
+.error.active {
+  padding: 0.3em 0em;
+}
+
+input:focus {
+  border: 2px solid var(--light-blue);
+}
+
+input.invalid {
+  border: 2px solid var(--primary-red);
+}
+
+input:not([type='checkbox']) {
+  outline: none;
+  box-sizing: border-box;
+  appearance: none;
+  padding: 5px;
+  border-radius: 5px;
 }

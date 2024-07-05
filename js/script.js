@@ -9,6 +9,7 @@ const deleteBookButton = document.querySelector('.delete-button');
 // Dialog selectors
 const bookDialog = document.querySelector('dialog');
 const submitBook = document.querySelector('.submit-book');
+const cancel = document.querySelector('.cancel');
 
 // Form selectors
 const bookForm = document.querySelector('.book-form');
@@ -16,6 +17,11 @@ const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
+
+// Form errors
+const titleError = document.querySelector('#title + span.error');
+const authorError = document.querySelector('#author + span.error');
+const pagesError = document.querySelector('#pages + span.error');
 
 class Book {
   #title;
@@ -153,25 +159,50 @@ function displayBook(book) {
 }
 
 addBookButton.addEventListener('click', () => {
-  title.value = '';
-  author.value = '';
-  pages.value = '';
-  read.checked = false;
+  bookForm.reset();
+  title.classList.remove('invalid');
+  author.classList.remove('invalid');
+  pages.classList.remove('invalid');
+  removeError(titleError);
+  removeError(authorError);
+  removeError(pagesError);
 
   bookDialog.showModal();
 });
 
-submitBook.addEventListener('click', (e) => {
+bookForm.addEventListener('submit', (e) => {
   let isValidForm = bookForm.checkValidity();
-  if (!isValidForm) {
-    bookForm.reportValidity();
-  } else {
+  if (isValidForm) {
     e.preventDefault();
     addBookToLibrary(
       new Book(title.value, author.value, pages.value, read.checked),
     );
     bookDialog.close();
+  } else {
+    if (!title.validity.valid) {
+      setTitleError();
+    }
+    if (!author.validity.valid) {
+      setAuthorError();
+    }
+    if (!pages.validity.valid) {
+      setPagesError();
+    }
+
+    e.preventDefault();
   }
+});
+
+cancel.addEventListener('click', () => {
+  bookDialog.close();
+});
+
+cancel.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+});
+
+submitBook.addEventListener('mousedown', (e) => {
+  e.preventDefault();
 });
 
 addBookToLibrary(new Book('The Hobbit', 'Tolkien J.R.R.', '295', false));
@@ -184,3 +215,101 @@ addBookToLibrary(
     true,
   ),
 );
+
+function setTitleError() {
+  title.classList.add('invalid');
+  titleError.classList.add('active');
+
+  if (title.validity.valueMissing) {
+    titleError.textContent = 'The title field cannot be empty';
+  } else if (title.validity.tooLong) {
+    titleError.textContent =
+      'The title field cannot be longer than 40 characters';
+  } else if (title.validity.tooShort) {
+    titleError.textContent =
+      'The title field cannot be shorter than 2 characters';
+  }
+}
+
+title.addEventListener('blur', () => {
+  if (!title.validity.valid) {
+    title.classList.add('invalid');
+    setTitleError();
+  }
+});
+
+title.addEventListener('input', () => {
+  if (title.classList.contains('invalid')) {
+    if (!title.validity.valid) {
+      setTitleError();
+    } else {
+      title.classList.remove('invalid');
+      removeError(titleError);
+    }
+  }
+});
+
+function setAuthorError() {
+  author.classList.add('invalid');
+  authorError.classList.add('active');
+
+  if (author.validity.valueMissing) {
+    authorError.textContent = 'The author field cannot be empty';
+  } else if (author.validity.tooLong) {
+    authorError.textContent =
+      'The author field cannot be longer than 40 characters';
+  }
+}
+
+author.addEventListener('blur', () => {
+  if (!author.validity.valid) {
+    setAuthorError();
+  }
+});
+
+author.addEventListener('input', () => {
+  if (author.classList.contains('invalid')) {
+    if (!author.validity.valid) {
+      setAuthorError();
+    } else {
+      author.classList.remove('invalid');
+      removeError(authorError);
+    }
+  }
+});
+
+function setPagesError() {
+  pages.classList.add('invalid');
+  pagesError.classList.add('active');
+
+  if (pages.validity.valueMissing) {
+    pagesError.textContent = 'The page # field cannot be empty';
+  } else if (pages.validity.badInput) {
+    pagesError.textContent = 'The page # field must be a number';
+  } else if (pages.validity.rangeUnderFlow) {
+    pagesError.textContent = 'Cannot have less than 1 page';
+  }
+}
+
+pages.addEventListener('blur', () => {
+  if (!pages.validity.valid) {
+    pages.classList.add('invalid');
+    setPagesError();
+  }
+});
+
+pages.addEventListener('input', () => {
+  if (pages.classList.contains('invalid')) {
+    if (!pages.validity.valid) {
+      setPagesError();
+    } else {
+      pages.classList.remove('invalid');
+      removeError(pagesError);
+    }
+  }
+});
+
+function removeError(element) {
+  element.textContent = '';
+  element.classList.remove('active');
+}
